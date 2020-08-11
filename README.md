@@ -1,4 +1,7 @@
 # Levi assets
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/mehr-it/levi-assets.svg?style=flat-square)](https://packagist.org/packages/mehr-it/levi-assets)
+[![Build Status](https://travis-ci.org/mehr-it/levi-assets.svg?branch=master)](https://travis-ci.org/mehr-it/levi-assets)
+
 This packages offers a toolkit to manage user assets, such as file uploads or any other
 third party content in Laravel.
 
