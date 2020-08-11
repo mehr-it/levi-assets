@@ -98,7 +98,8 @@
 
 			$manager->registerCollection('s3test', [
 				'public_storage' => 's3_testing',
-				'build' => [
+				'virus_scan'     => false,
+				'build'          => [
 					'_'  => false,
 					'b1' => [
 						'cache:max-age=345',
