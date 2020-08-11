@@ -84,11 +84,37 @@
 				throw new VirusScanFailedException("Failed to open \"{$path}\" for virus scan: {$e->getMessage()}");
 			}
 
+			try {
+				$this->scanStream($fp, false);
+			}
+			finally {
+				fclose($fp);
+			}
+
+			return $this;
+		}
+
+		/**
+		 * Scans the given stream for malicious content. If malicious content is detected or an error occurs, an exception is thrown.
+		 * @param resource $resource The stream
+		 * @param bool $rewind True if to rewind the stream after scanning
+		 * @return $this
+		 * @throws VirusDetectedException
+		 * @throws VirusScanException
+		 * @throws VirusScanFailedException
+		 * @throws \Safe\Exceptions\FilesystemException
+		 */
+		public function scanStream($resource, bool $rewind = true) {
+
+			// bypass virus scan
+			if ($this->bypass)
+				return $this;
+
 			// scan file
 			$status = null;
 			try {
 				/** @var array $result */
-				$result = $this->getClient()->scanResourceStream($fp);
+				$result = $this->getClient()->scanResourceStream($resource);
 				$status = $result['status'] ?? null;
 			}
 				/** @noinspection PhpRedundantCatchClauseInspection */
@@ -99,7 +125,8 @@
 				throw new VirusScanFailedException("Unexpected error on virus scan: ({$ex->getMessage()})", 0, $ex);
 			}
 			finally {
-				fclose($fp);
+				if ($rewind)
+					\Safe\rewind($resource);
 			}
 
 
@@ -107,11 +134,11 @@
 			switch ($status) {
 				case ClamAvClient::RESULT_ERROR:
 					$reason = $result['reason'] ?? null;
-					throw new VirusScanFailedException("ClamAV scanner failed to scan file \"{$path}\" with error \"{$reason}\" ({$status})");
+					throw new VirusScanFailedException("ClamAV scanner failed to scan stream with error \"{$reason}\" ({$status})");
 
 				case ClamAvClient::RESULT_FOUND:
 					$reason = $result['reason'] ?? null;
-					throw new VirusDetectedException("Malicious content ({$reason}) detected in file \"{$path}\".");
+					throw new VirusDetectedException("Malicious content ({$reason}) detected");
 
 				case ClamAvClient::RESULT_OK:
 					break;

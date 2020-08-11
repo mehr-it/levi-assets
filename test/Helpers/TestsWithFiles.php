@@ -28,4 +28,13 @@
 			}
 		}
 
+		protected function resourceWithContent(string $content) {
+			$resource = \Safe\fopen('php://temp', 'w+');
+
+			\Safe\fwrite($resource, $content);
+			\Safe\rewind($resource);
+
+			return $resource;
+		}
+
 	}
