@@ -14,6 +14,8 @@
 		 */
 		public function build($resource, &$writeOptions = [], array $options = []) {
 
+			$keepUnchanged = Arr::only($writeOptions, ['visibility']);
+
 			// extract options which can be passed to s3
 			$s3Options = Arr::only(
 				array_change_key_case($writeOptions, CASE_LOWER),
@@ -28,7 +30,7 @@
 			);
 
 			// rebuild write options in studly case as wanted by s3 client
-			$writeOptions = [];
+			$writeOptions = $keepUnchanged;
 			foreach($s3Options as $key => $value) {
 				$writeOptions[Str::studly($key)] = $value;
 			}

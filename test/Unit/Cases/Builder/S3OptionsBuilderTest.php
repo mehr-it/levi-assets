@@ -129,6 +129,7 @@
 
 			$mockHandler->append(function(CommandInterface $cmd, RequestInterface $req) {
 
+				$this->assertSame('public-read', $req->getHeaderLine('x-amz-acl'));
 				$this->assertSame('max-age=345', $req->getHeaderLine('Cache-Control'));
 				$this->assertSame('attachment', $req->getHeaderLine('Content-Disposition'));
 				$this->assertSame('gzip', $req->getHeaderLine('Content-Encoding'));

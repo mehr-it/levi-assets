@@ -126,7 +126,7 @@
 			if ($this->config['virus_scan'] ?? true)
 				$this->virusScan()->scanStream($resource);
 
-			if (!$this->storage()->put($this->storagePath($path), $resource))
+			if (!$this->storage()->put($this->storagePath($path), $resource, ['visibility' => 'private']))
 				throw new RuntimeException("Failed to write asset \"{$path}\"");
 
 			// publish
@@ -233,7 +233,9 @@
 
 					$assetResource = $this->storage()->readStream($storagePath);
 					$openResources = [];
-					$writeOptions  = [];
+					$writeOptions  = [
+						'visibility' => 'public'
+					];
 					/** @var AssetBuilder $lastBuilder */
 					$lastBuilder   = null;
 

@@ -276,7 +276,9 @@
 
 
 			$this->assertSame($content, Storage::disk('testing')->get('my/path/the/test/file'));
+			$this->assertSame('private', Storage::disk('testing')->getVisibility('my/path/the/test/file'));
 			$this->assertSame($content, Storage::disk('testing_public')->get('public_root/_/the/test/file'));
+			$this->assertSame('public', Storage::disk('testing_public')->getVisibility('public_root/_/the/test/file'));
 
 		}
 
