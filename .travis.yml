@@ -46,4 +46,4 @@ before_install:
 install:
   - travis_retry composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction --no-suggest
 
-script: vendor/bin/phpunit
+script: vendor/bin/phpunit --configuration ./phpunit.travis.xml
