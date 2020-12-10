@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2Address.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2ContactDetails.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2DispatchNotification.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2DispatchNotificationItem.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2Order.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2OrderConverter.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2OrderItem.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2OrderResponse.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2OrderResponseItem.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2Party.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2Remark.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../ukw/isajah/app/Util/OpenTrans/V2/OpenTransV2SourcingInfo.php" charset="UTF-8" />
+  </component>
+</project>

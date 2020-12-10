@@ -16,6 +16,10 @@
 	use RuntimeException;
 	use Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory;
 
+	/**
+	 * Class AssetsManager
+	 * @package MehrIt\LeviAssets
+	 */
 	class AssetsManager
 	{
 
@@ -34,7 +38,10 @@
 		 */
 		protected $linker;
 
-		protected $linkerConfig = [];
+		/**
+		 * @var array
+		 */
+		protected $linkerConfig;
 
 		/**
 		 * Creates a new instance

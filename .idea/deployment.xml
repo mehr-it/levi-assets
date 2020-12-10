@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="Hope-Eden">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Hope-Eden-16">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="debsrv06 - avp">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="debsrv06 - tecedo">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="debsrv06 - tibidono">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="dev.mehr-it">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="eli">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="eli - request-catcher-test">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="entspannung-federleicht.de">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="hochzeit.2plus1">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="homestead.app">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="its-mieger-quick-share">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="its-mieger.de">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="mehr-it.info">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="merlin - tecedo.de">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="merlin - tibidono">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="schuhmobil-live">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="supervision-abrell">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="tecedo-TestSRV-Dev (über debsrv06)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="tibidono - Demoshop">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="wasteProject">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="webdev">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../levi-assets-linker" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

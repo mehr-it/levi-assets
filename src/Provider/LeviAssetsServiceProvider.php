@@ -4,6 +4,7 @@
 	namespace MehrIt\LeviAssets\Provider;
 
 
+	use Illuminate\Contracts\Support\DeferrableProvider;
 	use Illuminate\Support\Arr;
 	use Illuminate\Support\ServiceProvider;
 	use Illuminate\View\Compilers\BladeCompiler;
@@ -11,7 +12,7 @@
 	use MehrIt\LeviAssets\Contracts\AssetsCollection;
 	use MehrIt\LeviAssets\Util\VirusScan\VirusScanner;
 
-	class LeviAssetsServiceProvider extends ServiceProvider
+	class LeviAssetsServiceProvider extends ServiceProvider implements DeferrableProvider
 	{
 		public $defer = true;
 
