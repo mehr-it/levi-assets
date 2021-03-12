@@ -68,6 +68,40 @@
 			$this->assertSame($config, $collection->getConfig());
 
 		}
+		
+		public function testGetPublicStorageName() {
+
+
+			$config = [
+				'storage_path' => 'my/path',
+				'public_storage' => 'public_disk'
+			];
+
+			/** @var AssetsManager|MockObject $managerMock */
+			$managerMock = $this->getMockBuilder(AssetsManager::class)->getMock();
+
+
+			$collection = new AssetsCollection($config, $managerMock);
+
+			$this->assertSame('public_disk', $collection->getPublicStorageName());
+		}
+		
+		public function testGetStorageName() {
+
+
+			$config = [
+				'storage_path' => 'my/path',
+				'storage' => 'private_disk'
+			];
+
+			/** @var AssetsManager|MockObject $managerMock */
+			$managerMock = $this->getMockBuilder(AssetsManager::class)->getMock();
+
+
+			$collection = new AssetsCollection($config, $managerMock);
+
+			$this->assertSame('private_disk', $collection->getStorageName());
+		}
 
 
 		public function testLinkFilters() {

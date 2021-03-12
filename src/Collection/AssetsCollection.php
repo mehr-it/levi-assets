@@ -46,6 +46,16 @@
 		 */
 		protected $publicStorage;
 
+		/**
+		 * @var string|null
+		 */
+		protected $publicStorageName;
+
+		/**
+		 * @var string|null
+		 */
+		protected $storageName;
+
 
 		/**
 		 * @var array|null
@@ -71,10 +81,10 @@
 			$this->config  = $config;
 			$this->manager = $manager;
 
-			$this->storagePath   = $config['storage_path'] ?? null;
-			$this->publicPath    = $config['public_path'] ?? null;
-			$this->storage       = $config['storage'] ?? null;
-			$this->publicStorage = $config['public_storage'] ?? 'public';
+			$this->storagePath       = $config['storage_path'] ?? null;
+			$this->publicPath        = $config['public_path'] ?? null;
+			$this->storageName       = $config['storage'] ?? null;
+			$this->publicStorageName = $config['public_storage'] ?? 'public';
 		}
 
 		/**
@@ -84,6 +94,24 @@
 		public function getConfig(): array {
 			return $this->config;
 		}
+
+		/**
+		 * Gets the name of the public storage disk
+		 * @return string|null The name of the public storage disk
+		 */
+		public function getPublicStorageName(): ?string {
+			return $this->publicStorageName;
+		}
+
+		/**
+		 * Gets the name of the storage disk
+		 * @return string|null The storage disk
+		 */
+		public function getStorageName(): ?string {
+			return $this->storageName;
+		}
+		
+		
 
 		/**
 		 * Gets the link filters to apply to the current collection
@@ -353,7 +381,7 @@
 		protected function storage(): Filesystem {
 
 			if (!($this->storage instanceof Filesystem))
-				$this->storage = Storage::disk($this->storage);
+				$this->storage = Storage::disk($this->storageName);
 
 			return $this->storage;
 		}
@@ -365,7 +393,7 @@
 		protected function publicStorage(): Filesystem {
 
 			if (!($this->publicStorage instanceof Filesystem))
-				$this->publicStorage = Storage::disk($this->publicStorage);
+				$this->publicStorage = Storage::disk($this->publicStorageName);
 
 			return $this->publicStorage;
 		}
