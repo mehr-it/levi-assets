@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../levi-assets-linker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../levi-images" vcs="Git" />
   </component>
 </project>

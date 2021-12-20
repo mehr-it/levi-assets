@@ -7,7 +7,10 @@
 	use Illuminate\Contracts\Filesystem\FileNotFoundException;
 	use Illuminate\Contracts\Filesystem\Filesystem;
 	use Illuminate\Support\Facades\Storage;
+	use Illuminate\Support\Str;
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\AssetsManager;
+	use MehrIt\LeviAssets\Contracts\Asset;
 	use MehrIt\LeviAssets\Contracts\AssetBuilder;
 	use MehrIt\LeviAssets\Contracts\AssetsCollection as AssetsCollectionContract;
 	use MehrIt\LeviAssets\Util\VirusScan\VirusScanner;
@@ -122,7 +125,7 @@
 			if ($this->linkFilters === null) {
 
 				$filters = [];
-				foreach($this->config['link_filters'] ?? [] as $currFilter) {
+				foreach ($this->config['link_filters'] ?? [] as $currFilter) {
 					$currArgs   = explode(':', $currFilter, 2);
 					$filterName = trim($currArgs[0]);
 					$filterArgs = ($currArgs[1] ?? null) !== null ? array_map('trim', explode(',', $currArgs[1])) : [];
@@ -185,7 +188,7 @@
 			try {
 				return $this->storage()->readStream($this->storagePath($path));
 			}
-			catch(FileNotFoundException $ex) {
+			catch (FileNotFoundException $ex) {
 				return null;
 			}
 		}
@@ -252,67 +255,102 @@
 
 			// get the target paths for all builds
 			$buildPaths = $this->buildPaths($path);
+			
+			$buildCache = [];
 
-			foreach($this->builders() as $buildName => $builders) {
+			foreach ($this->outputBuilders() as $buildName => $builders) {
 
 				$currPath = $buildPaths[$buildName];
 
 				if ($force || !$this->publicStorage()->exists($currPath)) {
 
-					$assetResource = $this->storage()->readStream($storagePath);
-					$openResources = [];
-					$writeOptions  = [
-						'visibility' => 'public'
-					];
-					/** @var AssetBuilder $lastBuilder */
-					$lastBuilder   = null;
-
-					try {
-
-						// process
-						foreach ($builders as [$builder, $options]) {
-							/** @var AssetBuilder $builder */
-							/** @var array $options */
-
-							// remember the input resource, so we can close it later
-							$openResources[] = $assetResource;
-
-							// build
-							$assetResource = $builder->build($assetResource, $writeOptions, $options);
-
-							// cleanup the previous builder
-							if ($lastBuilder)
-								$lastBuilder->cleanup();
-							$lastBuilder = $builder;
-						}
-
-						// save built asset
-						$this->publicStorage()->put($currPath, $assetResource, $writeOptions);
-
-					}
-					finally {
-
-						// close all open resources
-						$openResources[] = $assetResource;
-						foreach ($openResources as $currResource) {
-							if (is_resource($currResource))
-								fclose($currResource);
-						}
-
-						// invoke cleanup for the last builder
-						if ($lastBuilder)
-							$lastBuilder->cleanup();
-					}
+					// build the asset
+					$asset = $this->buildAsset($this->storage()->readStream($storagePath), $buildName, $buildCache);
+					
+					// store built asset
+					$this->publicStorage()->put($currPath, $asset->asResource(), $asset->getStorageOptions());
 				}
 			}
 
 
 			return $this;
 		}
-
+		
+		
 
 		/**
-		 * Gets the assets path for all builds
+		 * Builds a new asset
+		 * @param resource $source The original source
+		 * @param string $buildName The build name
+		 * @param Asset[] $buildCache Cache with virtual builds
+		 * @return Asset The asset
+		 */
+		protected function buildAsset($source, string $buildName, array &$buildCache): Asset {
+
+			$sp = explode(':', ltrim($buildName, ':'), 2);
+			if (count($sp) == 2) {
+				// this build uses a virtual build as source
+				
+				$virtualBuildName = $sp[1];
+				
+				// perform virtual build if not existing yet
+				if (!($buildCache[$virtualBuildName] ?? null))
+					$buildCache[$virtualBuildName] = $this->buildAsset($source, ":{$virtualBuildName}", $buildCache);
+
+				$asset = $buildCache[$virtualBuildName];
+				
+				//$buildName = substr($buildName, 0, - strlen($virtualBuildName) - 1);
+				
+			} else {
+				// this build uses the source file as source
+				
+				$asset = new ResourceAsset($source, [], $this->defaultStorageOptions());
+			}
+			
+			/** @var AssetBuilder $lastBuilder */
+			$lastBuilder = null;
+
+			$builders = $this->builders()[$buildName];
+			
+			try {
+				// process
+				foreach ($builders as [$builder, $options]) {
+					/** @var AssetBuilder $builder */    
+					/** @var array $options */
+
+					// build
+					$asset = $builder->build($asset, $options);
+
+					// cleanup the previous builder
+					if ($lastBuilder)
+						$lastBuilder->cleanup();
+					
+					$lastBuilder = $builder;
+				}
+
+				return $asset;
+			}
+			finally {
+
+				// invoke cleanup for the last builder
+				if ($lastBuilder)
+					$lastBuilder->cleanup();
+			}
+
+		}
+
+		/**
+		 * Returns the default storage options for assets
+		 * @return array The default storage options
+		 */
+		protected function defaultStorageOptions(): array {
+			return [
+				'visibility' => 'public',
+			];	
+		}		
+
+		/**
+		 * Gets the assets' path for all builds
 		 * @param string $path The path
 		 * @return string[] The paths for all builds
 		 */
@@ -320,9 +358,9 @@
 
 			$ret = [];
 
-			foreach ($this->builders() as $buildName => $builders) {
+			foreach ($this->outputBuilders() as $buildName => $builders) {
 
-				$currPath = $this->prefixPath($buildName, $path);
+				$currPath = $this->prefixPath(Str::before($buildName, ':'), $path);
 
 				// process path
 				foreach ($builders as [$builder, $options]) {
@@ -399,6 +437,30 @@
 		}
 
 		/**
+		 * Returns all builders except virtual
+		 * @return array
+		 */
+		protected function outputBuilders() {
+			$ret = [];
+
+			foreach ($this->builders() as $buildName => $curr) {
+				if (!$this->isVirtualBuild($buildName))
+					$ret[$buildName] = $curr;
+			}
+
+			return $ret;
+		}
+
+		/**
+		 * Returns if the given build is a virtual build
+		 * @param string $build The build name
+		 * @return bool True if virtual. Else false.
+		 */
+		protected function isVirtualBuild(string $build): bool {
+			return substr($build, 0, 1) == ':';
+		}
+		
+		/**
 		 * Gets the asset builders
 		 * @return array The builders
 		 */
@@ -421,11 +483,19 @@
 
 					$builders[$buildName] = [];
 
-					foreach ($currConfiguredBuilders as $currBuilder) {
+					foreach ($currConfiguredBuilders as $key => $currBuilder) {
 
-						$currArgs     = explode(':', $currBuilder, 2);
-						$builderName = $currArgs[0];
-						$builderArgs = ($currArgs[1] ?? null) !== null ? array_map('trim', explode(',', $currArgs[1])) : [];
+						if (is_int($key)) {
+							// builder and options are specified as string
+							$currArgs    = explode(':', $currBuilder, 2);
+							$builderName = $currArgs[0];
+							$builderArgs = ($currArgs[1] ?? null) !== null ? array_map('trim', explode(',', $currArgs[1])) : [];
+						}
+						else {
+							// Arguments are passed as array. Builder name is the array key. 
+							$builderName = $key;
+							$builderArgs = (array)$currBuilder;
+						}
 
 						$builderInstance = $this->manager->builder($builderName);
 						if (!$builderInstance)

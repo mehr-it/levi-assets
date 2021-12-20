@@ -5,6 +5,7 @@
 
 
 	use Carbon\Carbon;
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\Builder\ExpiresBuilder;
 	use MehrItLeviAssetsTest\Unit\Cases\TestCase;
 
@@ -22,62 +23,58 @@
 
 		public function testBuild_fromTimestamp() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ExpiresBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [Carbon::now()->getTimestamp()];
 
-			$builder->build($res, $writeOptions, $options);
-
-			$this->assertSame(['Expires' => Carbon::now()->setTimezone('GMT')->format('D, d M Y H:i:s \G\M\T')], $writeOptions);
+			$builder->build($res, $options);
+			
+			$this->assertSame(Carbon::now()->setTimezone('GMT')->format('D, d M Y H:i:s \G\M\T'), $res->getMeta('Expires'));
 
 		}
 
 		public function testBuild_fromDate() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ExpiresBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [Carbon::now()];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame(['Expires' => Carbon::now()->setTimezone('GMT')->format('D, d M Y H:i:s \G\M\T')], $writeOptions);
+			$this->assertSame(Carbon::now()->setTimezone('GMT')->format('D, d M Y H:i:s \G\M\T'), $res->getMeta('Expires'));
 
 		}
 
 		public function testBuild_fromString() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ExpiresBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [Carbon::now()->setTimezone('GMT')->format('D, d M Y H:i:s \G\M\T')];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame(['Expires' => Carbon::now()->setTimezone('GMT')->format('D, d M Y H:i:s \G\M\T')], $writeOptions);
+			$this->assertSame(Carbon::now()->setTimezone('GMT')->format('D, d M Y H:i:s \G\M\T'), $res->getMeta('Expires'));
 
 		}
 
 
 		public function testBuild_noOptions() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ExpiresBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame([], $writeOptions);
+			$this->assertSame(null, $res->getMeta('Expires'));
 
 		}
 	}

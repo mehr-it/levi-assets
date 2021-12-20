@@ -19,15 +19,70 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9689a74-073f-4df3-9bd9-4053be00d5da" name="Default Changelist" comment="added support for laravel 8">
-      <change afterPath="$PROJECT_DIR$/test-bootstrap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+    <list default="true" id="a9689a74-073f-4df3-9bd9-4053be00d5da" name="Default Changelist" comment="added useOptimizers">
+      <change afterPath="$PROJECT_DIR$/../levi-assets-linker/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../levi-assets-linker/.idea/phpunit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../levi-assets-linker/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/markdown.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php-test-framework.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Asset/AbstractAsset.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Asset/ImageAsset.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Asset/ResourceAsset.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/AbstractImageAssetBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageAutoCropBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageCanvasBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageFormatBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageGrayscaleBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageGrayscaleMaxBlackBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageMaxSizeBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageMinEdgeBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImageMinSizeBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/ImagePaletteBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Builder/OptimizeImageBuilder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Contracts/Asset.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Asset/ImageAssetTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Asset/ResourceAssetTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageAutoCropBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageCanvasBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageFormatBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageGrayscaleBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageGrayscaleMaxBlackBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageMaxSizeBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageMinEdgeBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageMinSizeBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ImagePaletteBuilderTest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/OptimizeImageBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../levi-assets-linker/.idea/levi-assets-linker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../levi-assets-linker/.idea/levi-assets-linker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../levi-assets-linker/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../levi-assets-linker/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/levi-assets.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/levi-assets.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml.example" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.xml.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AssetsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AssetsManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Provider/LeviAssetsServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Provider/LeviAssetsServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/leviAssets.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/leviAssets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/AbstractAssetBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/AbstractAssetBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/CacheControlBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/CacheControlBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/ContentDispositionBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/ContentDispositionBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/ContentEncodingBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/ContentEncodingBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/ContentLanguageBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/ContentLanguageBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/ContentTypeBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/ContentTypeBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/ExpiresBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/ExpiresBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Builder/S3OptionsBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Builder/S3OptionsBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Collection/AssetsCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Collection/AssetsCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Contracts/AssetBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contracts/AssetBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Helpers/MocksAssetBuilder.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Helpers/MocksAssetBuilder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Builder/CacheControlBuilderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/CacheControlBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentDispositionBuilderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentDispositionBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentEncodingBuilderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentEncodingBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentLanguageBuilderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentLanguageBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentTypeBuilderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ContentTypeBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Builder/ExpiresBuilderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/ExpiresBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Builder/S3OptionsBuilderTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Builder/S3OptionsBuilderTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/Collection/AssetsCollectionTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/Collection/AssetsCollectionTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Unit/Cases/TestCase.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/Unit/Cases/TestCase.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +94,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="chmgr &lt;github.mail@mehr-it.info&gt;" />
+      </list>
+    </option>
     <option name="PUSH_TAGS">
       <GitPushTagMode>
         <option name="argument" value="--tags" />
@@ -47,7 +107,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="Homestead - LeviAssets">
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="Homestead - LeviAssets 8.0">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/psr/container" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
@@ -66,7 +137,6 @@
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
       <path value="$PROJECT_DIR$/vendor/tijsverkoyen/css-to-inline-styles" />
-      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
@@ -141,12 +211,37 @@
       <path value="$PROJECT_DIR$/vendor/psr/http-client" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
       <path value="$PROJECT_DIR$/vendor/sebastian/type" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/debug" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/vendor/erusev/parsedown" />
-      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
+      <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
+      <path value="$PROJECT_DIR$/vendor/league/commonmark" />
+      <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/ramsey/collection" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/brick/math" />
+      <path value="$PROJECT_DIR$/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/vendor/spatie/backtrace" />
+      <path value="$PROJECT_DIR$/vendor/spatie/macroable" />
+      <path value="$PROJECT_DIR$/vendor/spatie/ray" />
+      <path value="$PROJECT_DIR$/vendor/spatie/laravel-ray" />
+      <path value="$PROJECT_DIR$/vendor/graham-campbell/result-type" />
+      <path value="$PROJECT_DIR$/vendor/pimple/pimple" />
+      <path value="$PROJECT_DIR$/vendor/zbateson/mail-mime-parser" />
+      <path value="$PROJECT_DIR$/vendor/zbateson/mb-wrapper" />
+      <path value="$PROJECT_DIR$/vendor/laravel/serializable-closure" />
+      <path value="$PROJECT_DIR$/vendor/zbateson/stream-decorators" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/imagine/imagine" />
+      <path value="$PROJECT_DIR$/vendor/spatie/image-optimizer" />
+      <path value="$PROJECT_DIR$/vendor/mehr-it/levi-images" />
+      <path value="$PROJECT_DIR$/vendor/contao/imagine-svg" />
+      <path value="$PROJECT_DIR$/vendor/aws/aws-crt-php" />
+      <path value="$PROJECT_DIR$/vendor/jcupitt/vips" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/rokka/imagine-vips" />
     </include_path>
   </component>
   <component name="ProjectId" id="1SErFTxUnm9rpn5X9jivHaPv53u" />
@@ -157,25 +252,33 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="credentialsType com.jetbrains.php.remote.interpreter.ui.PhpInplaceEditRemoteSdkForm" value="Vagrant" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../tecedo" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="INHERIT" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
     <property name="settings.editor.splitter.proportion" value="0.26405624" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../levi-images/test/resources" />
+      <recent name="$PROJECT_DIR$/../levi-images/src/Raster/Filter" />
+      <recent name="$PROJECT_DIR$/../levi-images" />
+      <recent name="$PROJECT_DIR$/../levi-images/resources/images" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../levi-images/resources/images/optimizer-test" />
       <recent name="$PROJECT_DIR$/../levi-assets-linker/src/Contracts" />
     </key>
   </component>
-  <component name="RunManager" selected="Multirun.Assets">
+  <component name="RunManager" selected="PHPUnit.Assets - PHP 8.0 - Laravel 7">
     <configuration name="Assets" type="Multirun" factoryName="Multirun" separateTabs="false" reuseTabsWithFailures="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0.0">
       <runConfiguration name="Assets - PHP 7.3 - Laravel 5.8" type="PHPUnit" />
       <runConfiguration name="Assets - PHP 7.3 - Laravel 6" type="PHPUnit" />
@@ -294,7 +397,7 @@
     <configuration name="Assets - PHP 8.0 - Laravel 7" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <CommandLine>
         <PhpTestInterpreterSettings>
-          <option name="interpreterName" value="Homestead PHP 8.0" />
+          <option name="interpreterName" value="Homestead - LeviAssets 8.0" />
         </PhpTestInterpreterSettings>
         <envs>
           <env name="TEST_PACKAGES" value="laravel/framework:7.* orchestra/testbench:5.*" />
@@ -306,13 +409,133 @@
     <configuration name="Assets - PHP 8.0 - Laravel 8" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <CommandLine>
         <PhpTestInterpreterSettings>
-          <option name="interpreterName" value="Homestead PHP 8.0" />
+          <option name="interpreterName" value="Homestead - LeviAssets 8.0" />
         </PhpTestInterpreterSettings>
         <envs>
           <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.*" />
         </envs>
       </CommandLine>
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="AssetsCollectionTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviAssets 8.0" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips:0.*" />
+        </envs>
+      </CommandLine>
+      <TestRunner class="MehrItLeviAssetsTest\Unit\Cases\Collection\AssetsCollectionTest" configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" file="$PROJECT_DIR$/test/Unit/Cases/Collection/AssetsCollectionTest.php" scope="Class" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ImageAutoCropBuilderTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 8.0" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips:0.*" />
+        </envs>
+      </CommandLine>
+      <TestRunner class="MehrItLeviAssetsTest\Unit\Cases\Builder\ImageAutoCropBuilderTest" configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" file="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageAutoCropBuilderTest.php" scope="Class" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ImageCanvasBuilderTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 8.0" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips:0.*" />
+        </envs>
+      </CommandLine>
+      <TestRunner class="MehrItLeviAssetsTest\Unit\Cases\Builder\ImageCanvasBuilderTest" configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" file="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageCanvasBuilderTest.php" scope="Class" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ImageGrayscaleMaxBlackBuilderTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 8.0" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips:0.*" />
+        </envs>
+      </CommandLine>
+      <TestRunner class="MehrItLeviAssetsTest\Unit\Cases\Builder\ImageGrayscaleMaxBlackBuilderTest" configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" file="$PROJECT_DIR$/test/Unit/Cases/Builder/ImageGrayscaleMaxBlackBuilderTest.php" scope="Class" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ImagePaletteBuilderTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 8.0" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips:0.*" />
+        </envs>
+      </CommandLine>
+      <TestRunner class="MehrItLeviAssetsTest\Unit\Cases\Builder\ImagePaletteBuilderTest" configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" file="$PROJECT_DIR$/test/Unit/Cases/Builder/ImagePaletteBuilderTest.php" scope="Class" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Images - PHP 7.3 - Laravel 5.8" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 7.3" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:5.8.* orchestra/testbench:3.8.* rokka/imagine-vips" />
+        </envs>
+      </CommandLine>
+      <TestRunner configuration_file="$PROJECT_DIR$/../levi-images/phpunit.xml" directory="$PROJECT_DIR$/../levi-images/test/Unit/Cases" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Images - PHP 7.3 - Laravel 6" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 7.3" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:6.* orchestra/testbench:4.* rokka/imagine-vips" />
+        </envs>
+      </CommandLine>
+      <TestRunner configuration_file="$PROJECT_DIR$/../levi-images/phpunit.xml" directory="$PROJECT_DIR$/../levi-images/test/Unit/Cases" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Images - PHP 7.3 - Laravel 7" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 7.3" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:7.* orchestra/testbench:5.* rokka/imagine-vips" />
+        </envs>
+      </CommandLine>
+      <TestRunner configuration_file="$PROJECT_DIR$/../levi-images/phpunit.xml" directory="$PROJECT_DIR$/../levi-images/test/Unit/Cases" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Images - PHP 7.3 - Laravel 8" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 7.3" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips" />
+        </envs>
+      </CommandLine>
+      <TestRunner configuration_file="$PROJECT_DIR$/../levi-images/phpunit.xml" directory="$PROJECT_DIR$/../levi-images/test/Unit/Cases" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Images - PHP 8.0 - Laravel 8" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 8.0" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips" />
+        </envs>
+      </CommandLine>
+      <TestRunner configuration_file="$PROJECT_DIR$/../levi-images/phpunit.xml" directory="$PROJECT_DIR$/../levi-images/test/Unit/Cases" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
     <configuration name="Linker - PHP 7.3" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -345,10 +568,25 @@
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <CommandLine>
         <PhpTestInterpreterSettings>
-          <option name="interpreterName" value="Homestead PHP 8.0" />
+          <option name="interpreterName" value="Homestead - LeviImages 8.0" />
         </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips:0.*" />
+        </envs>
       </CommandLine>
       <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <CommandLine>
+        <PhpTestInterpreterSettings>
+          <option name="interpreterName" value="Homestead - LeviImages 8.0" />
+        </PhpTestInterpreterSettings>
+        <envs>
+          <env name="TEST_PACKAGES" value="laravel/framework:8.* orchestra/testbench:6.* rokka/imagine-vips:0.*" />
+        </envs>
+      </CommandLine>
+      <TestRunner configuration_file="$PROJECT_DIR$/phpunit.xml" directory="$PROJECT_DIR$/test/Unit/Cases" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
     </configuration>
     <list>
@@ -364,10 +602,30 @@
       <item itemvalue="PHPUnit.Assets - PHP 7.4 - Laravel 8" />
       <item itemvalue="PHPUnit.Assets - PHP 8.0 - Laravel 7" />
       <item itemvalue="PHPUnit.Assets - PHP 8.0 - Laravel 8" />
+      <item itemvalue="PHPUnit.Images - PHP 8.0 - Laravel 8" />
+      <item itemvalue="PHPUnit.Images - PHP 7.3 - Laravel 8" />
+      <item itemvalue="PHPUnit.Images - PHP 7.3 - Laravel 7" />
+      <item itemvalue="PHPUnit.Images - PHP 7.3 - Laravel 6" />
+      <item itemvalue="PHPUnit.Images - PHP 7.3 - Laravel 5.8" />
       <item itemvalue="PHPUnit.Linker - PHP 7.3" />
       <item itemvalue="PHPUnit.Linker - PHP 7.4" />
       <item itemvalue="PHPUnit.Linker - PHP 8.0" />
+      <item itemvalue="PHPUnit.phpunit.xml" />
+      <item itemvalue="PHPUnit.ImageGrayscaleMaxBlackBuilderTest" />
+      <item itemvalue="PHPUnit.ImageAutoCropBuilderTest" />
+      <item itemvalue="PHPUnit.ImageCanvasBuilderTest" />
+      <item itemvalue="PHPUnit.ImagePaletteBuilderTest" />
+      <item itemvalue="PHPUnit.AssetsCollectionTest" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.AssetsCollectionTest" />
+        <item itemvalue="PHPUnit.ImagePaletteBuilderTest" />
+        <item itemvalue="PHPUnit.ImageCanvasBuilderTest" />
+        <item itemvalue="PHPUnit.ImageAutoCropBuilderTest" />
+        <item itemvalue="PHPUnit.ImageGrayscaleMaxBlackBuilderTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -386,6 +644,17 @@
       <workItem from="1596525787304" duration="123726000" />
       <workItem from="1597747409350" duration="3712000" />
       <workItem from="1607515736040" duration="4243000" />
+      <workItem from="1628513513087" duration="17000" />
+      <workItem from="1636031061780" duration="2633000" />
+      <workItem from="1636361604856" duration="11946000" />
+      <workItem from="1636625574893" duration="35944000" />
+      <workItem from="1637252455060" duration="21446000" />
+      <workItem from="1637570713339" duration="83067000" />
+      <workItem from="1638176963337" duration="61886000" />
+      <workItem from="1638793896034" duration="16601000" />
+      <workItem from="1638956804912" duration="64565000" />
+      <workItem from="1639381916157" duration="599000" />
+      <workItem from="1639641833638" duration="24312000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1571165330135</created>
@@ -471,7 +740,56 @@
       <option name="project" value="LOCAL" />
       <updated>1607586862817</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="allow to receive names of used storage disks from collection">
+      <created>1615546457330</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1615546457330</updated>
+    </task>
+    <task id="LOCAL-00014" summary="initial commit">
+      <created>1637853631129</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1637853631129</updated>
+    </task>
+    <task id="LOCAL-00015" summary="added license">
+      <created>1637853797493</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1637853797493</updated>
+    </task>
+    <task id="LOCAL-00016" summary="added useOptimizers">
+      <created>1637918763987</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1637918763987</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added raster image filters">
+      <created>1638966943327</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1638966943327</updated>
+    </task>
+    <task id="LOCAL-00018" summary="FIX: autocrop produced invalid crop boxes for some edge cases">
+      <created>1639657002136</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1639657002136</updated>
+    </task>
+    <task id="LOCAL-00019" summary="added package suggestions to composer.json">
+      <created>1639660755564</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1639660755564</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -487,10 +805,8 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="initial commit" />
     <MESSAGE value="FIX: wrong testcase base class" />
     <MESSAGE value="fixed readme" />
     <MESSAGE value="added assets manager" />
@@ -500,13 +816,42 @@
     <MESSAGE value="added badges to readme" />
     <MESSAGE value="ensure correct file visibility" />
     <MESSAGE value="added tests for PHP 8" />
-    <option name="LAST_COMMIT_MESSAGE" value="added tests for PHP 8" />
+    <MESSAGE value="allow to receive names of used storage disks from collection" />
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="added license" />
+    <MESSAGE value="added useOptimizers" />
+    <MESSAGE value="added raster image filters" />
+    <MESSAGE value="FIX: autocrop produced invalid crop boxes for some edge cases" />
+    <MESSAGE value="added package suggestions to composer.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="added package suggestions to composer.json" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="php-exception">
+          <properties name="ErrorException" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Collection/AssetsCollection.php</url>
+          <line>297</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Collection/AssetsCollection.php</url>
+          <line>299</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PHPUnitRunConfigurationType">
         <watch expression="$collectionInstance-&gt;linkFilters()" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

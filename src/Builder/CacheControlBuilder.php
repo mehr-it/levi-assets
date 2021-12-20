@@ -4,18 +4,19 @@
 	namespace MehrIt\LeviAssets\Builder;
 
 
+	use MehrIt\LeviAssets\Contracts\Asset;
+
 	class CacheControlBuilder extends AbstractAssetBuilder
 	{
 		/**
 		 * @inheritDoc
 		 */
-		public function build($resource, &$writeOptions = [], array $options = []) {
-
+		public function build(Asset $asset, array $options = []): Asset {
+			
 			if (count($options))
-				$writeOptions['Cache-Control'] = implode(', ', $options);
-
-			return $resource;
+				$asset->setMeta('Cache-Control', implode(', ', $options));
+			
+			return $asset;
 		}
-
 
 	}

@@ -4,6 +4,7 @@
 	namespace MehrItLeviAssetsTest\Unit\Cases\Builder;
 
 
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\Builder\ContentEncodingBuilder;
 	use MehrItLeviAssetsTest\Unit\Cases\TestCase;
 
@@ -11,46 +12,42 @@
 	{
 		public function testBuild() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentEncodingBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['gzip'];
 
-			$builder->build($res, $writeOptions, $options);
-
-			$this->assertSame(['Content-Encoding' => 'gzip'], $writeOptions);
-
+			$builder->build($res, $options);
+			
+			$this->assertSame('gzip', $res->getMeta('Content-Encoding'));
 		}
 
 		public function testBuild_multipleDirectives() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentEncodingBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['gzip', 'deflate'];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame(['Content-Encoding' => 'gzip, deflate'], $writeOptions);
+			$this->assertSame('gzip, deflate', $res->getMeta('Content-Encoding'));
 
 		}
 
 		public function testBuild_noOptions() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentEncodingBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame([], $writeOptions);
+			$this->assertSame(null, $res->getMeta('Content-Encoding'));
 
 		}
 	}

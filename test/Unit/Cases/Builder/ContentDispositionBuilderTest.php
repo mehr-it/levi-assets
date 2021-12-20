@@ -4,6 +4,7 @@
 	namespace MehrItLeviAssetsTest\Unit\Cases\Builder;
 
 
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\Builder\ContentDispositionBuilder;
 	use MehrItLeviAssetsTest\Unit\Cases\TestCase;
 
@@ -11,46 +12,43 @@
 	{
 		public function testBuild() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentDispositionBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['attachment'];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame(['Content-Disposition' => 'attachment'], $writeOptions);
+			$this->assertSame('attachment', $res->getMeta('Content-Disposition'));
 
 		}
 
 		public function testBuild_multipleDirectives() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentDispositionBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['attachment', 'filename="test.jpg"'];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame(['Content-Disposition' => 'attachment; filename="test.jpg"'], $writeOptions);
+			$this->assertSame('attachment; filename="test.jpg"', $res->getMeta('Content-Disposition'));
 
 		}
 
 		public function testBuild_noOptions() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentDispositionBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame([], $writeOptions);
+			$this->assertSame(null, $res->getMeta('Content-Disposition'));
 
 		}
 	}

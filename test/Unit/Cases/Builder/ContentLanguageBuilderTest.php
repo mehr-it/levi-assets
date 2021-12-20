@@ -4,6 +4,7 @@
 	namespace MehrItLeviAssetsTest\Unit\Cases\Builder;
 
 
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\Builder\ContentLanguageBuilder;
 	use MehrItLeviAssetsTest\Unit\Cases\TestCase;
 
@@ -11,46 +12,44 @@
 	{
 		public function testBuild() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentLanguageBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['de-DE'];
 
-			$builder->build($res, $writeOptions, $options);
-
-			$this->assertSame(['Content-Language' => 'de-DE'], $writeOptions);
+			$builder->build($res,  $options);
+			
+			$this->assertSame('de-DE', $res->getMeta('Content-Language'));
 
 		}
 
 		public function testBuild_multipleDirectives() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentLanguageBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['de-DE', 'en-CA'];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame(['Content-Language' => 'de-DE, en-CA'], $writeOptions);
+			$this->assertSame('de-DE, en-CA', $res->getMeta('Content-Language'));
+			
 
 		}
 
 		public function testBuild_noOptions() {
 
-			$res = fopen('php://temp', 'w+');
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), [], []);
 
 			$builder = new ContentLanguageBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
-			$this->assertSame([], $writeOptions);
+			$this->assertSame(null, $res->getMeta('Content-Language'));
 
 		}
 

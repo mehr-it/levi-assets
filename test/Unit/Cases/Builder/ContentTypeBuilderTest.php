@@ -4,6 +4,7 @@
 	namespace MehrItLeviAssetsTest\Unit\Cases\Builder;
 
 
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\Builder\ContentTypeBuilder;
 	use MehrItLeviAssetsTest\Helpers\TestsWithFiles;
 	use MehrItLeviAssetsTest\Unit\Cases\TestCase;
@@ -14,85 +15,80 @@
 
 		public function testBuild() {
 
-			$res = $this->resourceWithContent('test text');
+			$res = new ResourceAsset($this->resourceWithContent('test text'), [], []);
 
 			$builder = new ContentTypeBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['text/html'];
 
-			$retRes = $builder->build($res, $writeOptions, $options);
+			$retRes = $builder->build($res, $options);
+			
+			$this->assertSame('text/html', $res->getMeta('Content-Type'));
 
-			$this->assertSame(['Content-Type' => 'text/html'], $writeOptions);
-
-			$this->assertSame('test text', \Safe\stream_get_contents($retRes));
+			$this->assertSame('test text', \Safe\stream_get_contents($retRes->asResource()));
 
 		}
 
 		public function testBuild_multipleDirectives() {
 
-			$res = $this->resourceWithContent('test text');
+			$res = new ResourceAsset($this->resourceWithContent('test text'), [], []);
 
 			$builder = new ContentTypeBuilder();
-
-			$writeOptions = [];
+			
 			$options      = ['text/html', 'charset=UTF-8'];
 
-			$retRes = $builder->build($res, $writeOptions, $options);
+			$retRes = $builder->build($res, $options);
 
-			$this->assertSame(['Content-Type' => 'text/html; charset=UTF-8'], $writeOptions);
+			$this->assertSame('text/html; charset=UTF-8', $res->getMeta('Content-Type'));
 
-			$this->assertSame('test text', \Safe\stream_get_contents($retRes));
+			$this->assertSame('test text', \Safe\stream_get_contents($retRes->asResource()));
 
 		}
 
 		public function testBuild_noOptions_textAscii() {
 
-			$res = $this->resourceWithContent('test text');
+			$res = new ResourceAsset($this->resourceWithContent('test text'), [], []);
 
 			$builder = new ContentTypeBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$retRes = $builder->build($res, $writeOptions, $options);
+			$retRes = $builder->build($res, $options);
 
-			$this->assertSame(['Content-Type' => 'text/plain; charset=us-ascii'], $writeOptions);
+			$this->assertSame('text/plain; charset=us-ascii', $res->getMeta('Content-Type'));
 
-			$this->assertSame('test text', \Safe\stream_get_contents($retRes));
+			$this->assertSame('test text', \Safe\stream_get_contents($retRes->asResource()));
 		}
 
 		public function testBuild_noOptions_textUft8() {
-
-			$res = $this->resourceWithContent('test text für mich');
+			
+			$res = new ResourceAsset($this->resourceWithContent('test text für mich'), [], []);
 
 			$builder = new ContentTypeBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$retRes = $builder->build($res, $writeOptions, $options);
+			$retRes = $builder->build($res, $options);
 
-			$this->assertSame(['Content-Type' => 'text/plain; charset=utf-8'], $writeOptions);
+			$this->assertSame('text/plain; charset=utf-8', $res->getMeta('Content-Type'));
 
-			$this->assertSame('test text für mich', \Safe\stream_get_contents($retRes));
+			$this->assertSame('test text für mich', \Safe\stream_get_contents($retRes->asResource()));
 
 		}
 
 		public function testBuild_noOptions_html() {
 
-			$res = $this->resourceWithContent('<html lang="en"><body></body></html>');
+			$res = new ResourceAsset($this->resourceWithContent('<html lang="en"><body></body></html>'), [], []);
 
 			$builder = new ContentTypeBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$retRes = $builder->build($res, $writeOptions, $options);
+			$retRes = $builder->build($res, $options);
 
-			$this->assertSame(['Content-Type' => 'text/html; charset=us-ascii'], $writeOptions);
+			$this->assertSame('text/html; charset=us-ascii', $res->getMeta('Content-Type'));
 
-			$this->assertSame('<html lang="en"><body></body></html>', \Safe\stream_get_contents($retRes));
+			$this->assertSame('<html lang="en"><body></body></html>', \Safe\stream_get_contents($retRes->asResource()));
 		}
 
 		public function testBuild_noOptions_pdf() {
@@ -127,18 +123,17 @@ yeD4EW4hutkwVBe8UsiDjHilc8XtcxwuXwn6hRgRRfGGoC5x6grDpw0INLp297kR/DhqazNP9o66
 EOF;
 
 
-			$res = $this->resourceWithContent(base64_decode(str_replace("\n", '', $pdf)));
+			$res = new ResourceAsset($this->resourceWithContent(base64_decode(str_replace("\n", '', $pdf))), [], []);
 
 			$builder = new ContentTypeBuilder();
-
-			$writeOptions = [];
+			
 			$options      = [];
 
-			$retRes = $builder->build($res, $writeOptions, $options);
+			$retRes = $builder->build($res, $options);
 
-			$this->assertSame(['Content-Type' => 'application/pdf; charset=binary'], $writeOptions);
+			$this->assertSame('application/pdf; charset=binary', $res->getMeta('Content-Type'));
 
-			$this->assertSame(base64_decode(str_replace("\n", '', $pdf)), \Safe\stream_get_contents($retRes));
+			$this->assertSame(base64_decode(str_replace("\n", '', $pdf)), \Safe\stream_get_contents($retRes->asResource()));
 
 		}
 	}

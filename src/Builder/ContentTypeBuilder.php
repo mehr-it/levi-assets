@@ -5,24 +5,27 @@
 
 
 	use finfo;
+	use MehrIt\LeviAssets\Contracts\Asset;
+	use Safe\Exceptions\FilesystemException;
 
 	class ContentTypeBuilder extends AbstractAssetBuilder
 	{
 		/**
 		 * @inheritDoc
+		 * @throws FilesystemException
 		 */
-		public function build($resource, &$writeOptions = [], array $options = []) {
-
+		public function build(Asset $asset, array $options = []): Asset {
+			
 			if (count($options)) {
-				$writeOptions['Content-Type'] = implode('; ', $options);
+				$asset->setMeta('Content-Type', implode('; ', $options));
 			}
 			else {
-				$detected = $this->detectContentType($resource);
+				$detected = $this->detectContentType($asset->asResource());
 				if ($detected && $detected != 'application/octet-stream')
-					$writeOptions['Content-Type'] = $detected;
+					$asset->setMeta('Content-Type', $detected);
 			}
-
-			return $resource;
+			
+			return $asset;
 		}
 
 
@@ -30,16 +33,16 @@
 		 * Detects the content type of the given resource
 		 * @param resource $resource The resource
 		 * @return string|null The content type or null if not detected
-		 * @throws \Safe\Exceptions\FilesystemException
+		 * @throws FilesystemException
 		 */
 		protected function detectContentType($resource): ?string {
 
 			if (!class_exists('\\finfo'))
 				return null;
 
-			$finfo = new finfo(FILEINFO_MIME);
+			$fInfo = new finfo(FILEINFO_MIME);
 
-			$mimeType = $finfo->buffer(\Safe\fread($resource, 100000)) ?: null;
+			$mimeType = $fInfo->buffer(\Safe\fread($resource, 100000)) ?: null;
 
 			\Safe\rewind($resource);
 

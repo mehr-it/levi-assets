@@ -4,16 +4,18 @@
 	namespace MehrIt\LeviAssets\Builder;
 
 
+	use MehrIt\LeviAssets\Contracts\Asset;
+
 	class ContentEncodingBuilder extends AbstractAssetBuilder
 	{
 		/**
 		 * @inheritDoc
 		 */
-		public function build($resource, &$writeOptions = [], array $options = []) {
-
+		public function build(Asset $asset, array $options = []): Asset {
+			
 			if (count($options))
-				$writeOptions['Content-Encoding'] = implode(', ', $options);
-
-			return $resource;
+				$asset->setMeta('Content-Encoding', implode(', ', $options));
+			
+			return $asset;
 		}
 	}

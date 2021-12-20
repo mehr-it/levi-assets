@@ -8,8 +8,10 @@
 	use League\Flysystem\Config;
 	use League\Flysystem\Filesystem;
 	use League\Flysystem\Memory\MemoryAdapter;
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\AssetsManager;
 	use MehrIt\LeviAssets\Collection\AssetsCollection;
+	use MehrIt\LeviAssets\Contracts\Asset;
 	use MehrIt\LeviAssets\Util\VirusScan\VirusScanner;
 	use MehrItLeviAssetsTest\Helpers\MocksAssetBuilder;
 	use MehrItLeviAssetsTest\Helpers\TestsWithFiles;
@@ -438,18 +440,18 @@
 					[
 						'jpg',
 						$this->mockAssetBuilder(
-							function($stream, &$writeOptions) {
+							function(Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
 
 								fwrite($res, '||jpg');
 
-								$writeOptions['Meta1'] = 'value1';
-
 								rewind($res);
 
-								return $res;
+								$asset->setStorageOption('Meta1', 'value1');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path) {
 								$path = \Safe\preg_replace('/\\..*?$/', '.jpg', $path);
@@ -459,20 +461,21 @@
 					[
 						'size',
 						$this->mockAssetBuilder(
-							function ($stream, &$writeOptions, $options) {
+							function (Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
-
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
+								
 								fwrite($res, "||{$options[0]}x{$options[1]}");
 
-								$writeOptions['Meta2'] = 'value2';
-
 								rewind($res);
+								
+								$asset->setStorageOption('Meta2', 'value2');
 
-								return $res;
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path, $options) {
+								
 								$path = \Safe\preg_replace('/\\.(.*?)$/', "_{$options[0]}x{$options[1]}.$1", $path);
 							}
 						),
@@ -545,16 +548,18 @@
 					[
 						'jpg',
 						$this->mockAssetBuilder(
-							function($stream) {
+							function (Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
 
 								fwrite($res, '||jpg');
 
 								rewind($res);
 
-								return $res;
+								$asset->setStorageOption('Meta1', 'value1');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path) {
 								$path = \Safe\preg_replace('/\\..*?$/', '.jpg', $path);
@@ -564,18 +569,21 @@
 					[
 						'size',
 						$this->mockAssetBuilder(
-							function ($stream, $writeOptions, $options) {
+							function (Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
 
 								fwrite($res, "||{$options[0]}x{$options[1]}");
 
 								rewind($res);
 
-								return $res;
+								$asset->setStorageOption('Meta2', 'value2');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path, $options) {
+
 								$path = \Safe\preg_replace('/\\.(.*?)$/', "_{$options[0]}x{$options[1]}.$1", $path);
 							}
 						),
@@ -597,6 +605,226 @@
 			$this->assertSame("{$content2}||jpg", Storage::disk('testing_public')->get('public_root/fmt_jpeg/the/test/file2.jpg'));
 			$this->assertSame("{$content2}||50x90||jpg", Storage::disk('testing_public')->get('public_root/fmt_jpeg_small/the/test/file2_50x90.jpg'));
 
+
+		}
+
+		public function testPut_customBuilders_assocOptions() {
+
+
+			$content1 = 'file content 1';
+			$content2 = 'file content 2';
+
+			$config = [
+				'storage'        => 'testing',
+				'storage_path'   => 'my/path',
+				'public_storage' => 'testing_public',
+				'public_path'    => 'public_root',
+				'virus_scan'     => false,
+				'build'          => [
+					'fmt_jpeg'       => [
+						'jpg',
+					],
+					'fmt_jpeg_small' => [
+						'size' => ['width' => '50', 'height' => '90'],
+						'jpg',
+					]
+				]
+			];
+
+			/** @var AssetsManager|MockObject $managerMock */
+			$managerMock = $this->getMockBuilder(AssetsManager::class)->getMock();
+
+
+			$scanner = $this->mockAppSingleton(VirusScanner::class);
+			$scanner
+				->expects($this->never())
+				->method('scanStream');
+
+			$res1 = $this->resourceWithContent($content1);
+			$res2 = $this->resourceWithContent($content2);
+
+			$collection = new AssetsCollection($config, $managerMock);
+
+			$managerMock
+				->method('builder')
+				->willReturnMap([
+					[
+						'jpg',
+						$this->mockAssetBuilder(
+							function (Asset $asset, $options) {
+								$res = \Safe\fopen('php://temp', 'w+');
+
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
+
+								fwrite($res, '||jpg');
+
+								rewind($res);
+
+								$asset->setStorageOption('Meta1', 'value1');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
+							},
+							function (&$path) {
+								$path = \Safe\preg_replace('/\\..*?$/', '.jpg', $path);
+							}
+						),
+					],
+					[
+						'size',
+						$this->mockAssetBuilder(
+							function (Asset $asset, $options) {
+								$res = \Safe\fopen('php://temp', 'w+');
+
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
+
+								fwrite($res, "||{$options['width']}x{$options['height']}");
+
+								rewind($res);
+
+								$asset->setStorageOption('Meta2', 'value2');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
+							},
+							function (&$path, $options) {
+
+								$path = \Safe\preg_replace('/\\.(.*?)$/', "_{$options['width']}x{$options['height']}.$1", $path);
+							}
+						),
+					],
+				]);
+
+
+			$this->assertSame($collection, $collection->put('the/test/file.png', $res1));
+			$this->assertSame($collection, $collection->put('the/test/file2.png', $res2));
+
+
+			$this->assertSame($content1, Storage::disk('testing')->get('my/path/the/test/file.png'));
+			$this->assertSame($content1, Storage::disk('testing_public')->get('public_root/_/the/test/file.png'));
+			$this->assertSame("{$content1}||jpg", Storage::disk('testing_public')->get('public_root/fmt_jpeg/the/test/file.jpg'));
+			$this->assertSame("{$content1}||50x90||jpg", Storage::disk('testing_public')->get('public_root/fmt_jpeg_small/the/test/file_50x90.jpg'));
+
+			$this->assertSame($content2, Storage::disk('testing')->get('my/path/the/test/file2.png'));
+			$this->assertSame($content2, Storage::disk('testing_public')->get('public_root/_/the/test/file2.png'));
+			$this->assertSame("{$content2}||jpg", Storage::disk('testing_public')->get('public_root/fmt_jpeg/the/test/file2.jpg'));
+			$this->assertSame("{$content2}||50x90||jpg", Storage::disk('testing_public')->get('public_root/fmt_jpeg_small/the/test/file2_50x90.jpg'));
+
+			$this->assertSame('value1', Storage::disk('testing_public')->getDriver()->getAdapter()->getPassedConfig('public_root/fmt_jpeg/the/test/file2.jpg')->get('Meta1'));
+			$this->assertSame(null, Storage::disk('testing_public')->getDriver()->getAdapter()->getPassedConfig('public_root/fmt_jpeg/the/test/file2.jpg')->get('Meta2'));
+			$this->assertSame('value1', Storage::disk('testing_public')->getDriver()->getAdapter()->getPassedConfig('public_root/fmt_jpeg_small/the/test/file_50x90.jpg')->get('Meta1'));
+			$this->assertSame('value2', Storage::disk('testing_public')->getDriver()->getAdapter()->getPassedConfig('public_root/fmt_jpeg_small/the/test/file_50x90.jpg')->get('Meta2'));
+
+		}
+
+		public function testPut_customBuilders_virtualBuilds() {
+
+
+			$content1 = 'file content 1';
+			$content2 = 'file content 2';
+
+			$config = [
+				'storage'        => 'testing',
+				'storage_path'   => 'my/path',
+				'public_storage' => 'testing_public',
+				'public_path'    => 'public_root',
+				'virus_scan'     => false,
+				'build'          => [
+					':v1' => [
+						'b1',	
+					],
+					'r1:v1'       => [
+						'b2',
+					],
+					'r2:v1' => [
+						'b3',
+					]
+				]
+			];
+
+			/** @var AssetsManager|MockObject $managerMock */
+			$managerMock = $this->getMockBuilder(AssetsManager::class)->getMock();
+
+
+			$scanner = $this->mockAppSingleton(VirusScanner::class);
+			$scanner
+				->expects($this->never())
+				->method('scanStream');
+
+			$res1 = $this->resourceWithContent($content1);
+			$res2 = $this->resourceWithContent($content2);
+
+			$collection = new AssetsCollection($config, $managerMock);
+
+			$virtualCallCount = 0;
+			
+			$managerMock
+				->method('builder')
+				->willReturnMap([
+					[
+						'b1',
+						$this->mockAssetBuilder(
+							function (Asset $asset, $options) use (&$virtualCallCount) {
+
+								$this->assertSame(0, $virtualCallCount);
+								++$virtualCallCount;
+								
+								$res = \Safe\fopen('php://temp', 'w+');
+
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
+
+								fwrite($res, 'a');
+
+								rewind($res);
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
+							}
+						),
+					],
+					[
+						'b2',
+						$this->mockAssetBuilder(
+							function (Asset $asset, $options) {
+								$res = \Safe\fopen('php://temp', 'w+');
+
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
+
+								fwrite($res, "b2");
+
+								rewind($res);
+								
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
+							}
+						),
+					],
+					[
+						'b3',
+						$this->mockAssetBuilder(
+							function (Asset $asset, $options) {
+								$res = \Safe\fopen('php://temp', 'w+');
+
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
+
+								fwrite($res, "b3");
+
+								rewind($res);
+								
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
+							}
+						),
+					],
+				]);
+
+
+			$this->assertSame($collection, $collection->put('the/test/file.png', $res1));
+
+
+
+			$this->assertSame($content1, Storage::disk('testing')->get('my/path/the/test/file.png'));
+			$this->assertSame($content1, Storage::disk('testing_public')->get('public_root/_/the/test/file.png'));
+			$this->assertSame("{$content1}ab2", Storage::disk('testing_public')->get('public_root/r1/the/test/file.png'));
+			$this->assertSame("{$content1}ab3", Storage::disk('testing_public')->get('public_root/r2/the/test/file.png'));
+			
 
 		}
 
@@ -1263,16 +1491,18 @@
 					[
 						'jpg',
 						$this->mockAssetBuilder(
-							function ($stream) {
+							function (Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
 
 								fwrite($res, '||jpg');
 
 								rewind($res);
 
-								return $res;
+								$asset->setStorageOption('Meta1', 'value1');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path) {
 								$path = \Safe\preg_replace('/\\..*?$/', '.jpg', $path);
@@ -1282,18 +1512,21 @@
 					[
 						'size',
 						$this->mockAssetBuilder(
-							function ($stream, $writeOptions, $options) {
+							function (Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
 
 								fwrite($res, "||{$options[0]}x{$options[1]}");
 
 								rewind($res);
 
-								return $res;
+								$asset->setStorageOption('Meta2', 'value2');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path, $options) {
+
 								$path = \Safe\preg_replace('/\\.(.*?)$/', "_{$options[0]}x{$options[1]}.$1", $path);
 							}
 						),
@@ -1372,16 +1605,18 @@
 					[
 						'jpg',
 						$this->mockAssetBuilder(
-							function ($stream) {
+							function (Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
 
 								fwrite($res, '||jpg');
 
 								rewind($res);
 
-								return $res;
+								$asset->setStorageOption('Meta1', 'value1');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path) {
 								$path = \Safe\preg_replace('/\\..*?$/', '.jpg', $path);
@@ -1391,18 +1626,21 @@
 					[
 						'size',
 						$this->mockAssetBuilder(
-							function ($stream, $writeOptions, $options) {
+							function (Asset $asset, $options) {
 								$res = \Safe\fopen('php://temp', 'w+');
 
-								\Safe\stream_copy_to_stream($stream, $res);
+								\Safe\stream_copy_to_stream($asset->asResource(), $res);
 
 								fwrite($res, "||{$options[0]}x{$options[1]}");
 
 								rewind($res);
 
-								return $res;
+								$asset->setStorageOption('Meta2', 'value2');
+
+								return new ResourceAsset($res, $asset->getMetaData(), $asset->getStorageOptions());
 							},
 							function (&$path, $options) {
+
 								$path = \Safe\preg_replace('/\\.(.*?)$/', "_{$options[0]}x{$options[1]}.$1", $path);
 							}
 						),

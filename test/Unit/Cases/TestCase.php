@@ -6,6 +6,8 @@
 
 	use MehrIt\LeviAssets\Facades\Assets;
 	use MehrIt\LeviAssets\Provider\LeviAssetsServiceProvider;
+	use MehrIt\LeviImages\Facades\LeviImages;
+	use MehrIt\LeviImages\Provider\LeviImagesServiceProvider;
 
 	class TestCase extends \Orchestra\Testbench\TestCase
 	{
@@ -13,6 +15,7 @@
 
 			return [
 				LeviAssetsServiceProvider::class,
+				LeviImagesServiceProvider::class,
 			];
 
 		}
@@ -24,6 +27,7 @@
 
 			return [
 				'Assets' => Assets::class,
+				'LeviImages' => LeviImages::class,
 			];
 		}
 
@@ -45,5 +49,22 @@
 			});
 
 			return $mock;
+		}
+		
+		protected function resourceWithContent(string $content) {
+			$f = fopen('php://memory', 'w+');
+			fwrite($f, $content);
+			
+			rewind($f);
+			
+			return $f;
+		}
+		
+		protected function png1Pix() {
+			return base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
+		}
+		
+		protected function png10Pix() {
+			return base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAD0lEQVR42mNkwAIYh7IgAAVVAAuInjI5AAAAAElFTkSuQmCC');
 		}
 	}

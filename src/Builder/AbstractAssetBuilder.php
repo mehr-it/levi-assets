@@ -11,29 +11,49 @@
 		/**
 		 * @inheritDoc
 		 */
-		public function build($resource, &$writeOptions = [], array $options = []) {
+		public function cleanup(): AssetBuilder {
 
-			// by default we simply pass-through
-			return $resource;
+			// there is nothing to clean up
+			return $this;
 		}
 
 		/**
 		 * @inheritDoc
 		 */
 		public function processPath(string &$path, array $options = []): AssetBuilder {
-
-			// by default we keep the path unchanged
+			
+			// default implementation leaves the path unchanged
+			
 			return $this;
 		}
+
 
 		/**
-		 * @inheritDoc
+		 * Extracts the named options from the options array
+		 * @param array $options The options
+		 * @return array The named options
 		 */
-		public function cleanup(): AssetBuilder {
+		protected function extractNamedOptions(array $options): array {
+			
+			$ret = [];
+			foreach ($options as $key => $currOption) {
+				if (is_int($key)) {
+					$sp = explode('=', (string)$currOption, 2);
 
-			// there is nothing to cleanup
-			return $this;
+					if (count($sp) == 2) {
+						$key        = trim($sp[0]);
+						$currOption = trim($sp[1]);
+					}
+					else {
+						continue;
+					}
+
+				}
+
+				$ret[$key] = $currOption;
+			}
+
+			return $ret;
 		}
-
 
 	}

@@ -11,6 +11,7 @@
 	use Illuminate\Support\Facades\Storage;
 	use League\Flysystem\Filesystem;
 	use League\Flysystem\Memory\MemoryAdapter;
+	use MehrIt\LeviAssets\Asset\ResourceAsset;
 	use MehrIt\LeviAssets\AssetsManager;
 	use MehrIt\LeviAssets\Builder\CacheControlBuilder;
 	use MehrIt\LeviAssets\Builder\ContentDispositionBuilder;
@@ -56,12 +57,8 @@
 
 
 		public function testBuild() {
-
-			$res = fopen('php://temp', 'w+');
-
-			$builder = new S3OptionsBuilder();
-
-			$writeOptions = [
+			
+			$meta = [
 				'Cache-Control'       => 'max-age=86400',
 				'Content-Disposition' => 'attachment',
 				'content-encoding'    => 'gzip',
@@ -71,9 +68,14 @@
 				'expires'             => 'Wed, 21 Oct 2015 07:28:00 GMT',
 				'Other'               => 'other-value',
 			];
+
+			$res = new ResourceAsset(fopen('php://temp', 'w+'), $meta, []);
+
+			$builder = new S3OptionsBuilder();
+			
 			$options = [];
 
-			$builder->build($res, $writeOptions, $options);
+			$builder->build($res, $options);
 
 			$this->assertSame(
 				[
@@ -84,7 +86,7 @@
 					'ContentType'        => 'text/html',
 					'Expires'            => 'Wed, 21 Oct 2015 07:28:00 GMT'
 				],
-				$writeOptions
+				$res->getStorageOptions()
 			);
 
 

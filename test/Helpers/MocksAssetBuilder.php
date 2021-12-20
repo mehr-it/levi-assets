@@ -25,7 +25,7 @@
 
 			$builder
 				->method('build')
-				->willReturnCallback($build ?: function($resource) { return $resource; });
+				->willReturnCallback($build ?: function($asset) { return $asset; });
 
 			$builder
 				->method('processPath')

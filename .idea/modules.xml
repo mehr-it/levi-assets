@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/levi-assets.iml" filepath="$PROJECT_DIR$/.idea/levi-assets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../levi-assets-images/.idea/levi-assets-images.iml" filepath="$PROJECT_DIR$/../levi-assets-images/.idea/levi-assets-images.iml" />
       <module fileurl="file://$PROJECT_DIR$/../levi-assets-linker/.idea/levi-assets-linker.iml" filepath="$PROJECT_DIR$/../levi-assets-linker/.idea/levi-assets-linker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../levi-images/.idea/levi-images.iml" filepath="$PROJECT_DIR$/../levi-images/.idea/levi-images.iml" />
     </modules>
   </component>
 </project>

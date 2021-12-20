@@ -5,14 +5,15 @@
 
 
 	use DateTimeInterface;
+	use MehrIt\LeviAssets\Contracts\Asset;
 
 	class ExpiresBuilder extends AbstractAssetBuilder
 	{
 		/**
 		 * @inheritDoc
 		 */
-		public function build($resource, &$writeOptions = [], array $options = []) {
-
+		public function build(Asset $asset, array $options = []): Asset {
+			
 			$date = $options[0] ?? null;
 			if ($date !== null) {
 
@@ -23,9 +24,9 @@
 					$date = gmdate('D, d M Y H:i:s \G\M\T', $date->getTimestamp());
 
 
-				$writeOptions['Expires'] = $date;
+				$asset->setMeta('Expires', $date);
 			}
-
-			return $resource;
+			
+			return $asset;
 		}
 	}

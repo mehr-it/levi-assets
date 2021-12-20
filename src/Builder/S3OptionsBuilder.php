@@ -6,37 +6,32 @@
 
 	use Illuminate\Support\Arr;
 	use Illuminate\Support\Str;
+	use MehrIt\LeviAssets\Contracts\Asset;
 
 	class S3OptionsBuilder extends AbstractAssetBuilder
 	{
+		const META_MAP = [
+			'cache-control'       => 'CacheControl',
+			'content-disposition' => 'ContentDisposition',
+			'content-encoding'    => 'ContentEncoding',
+			'content-language'    => 'ContentLanguage',
+			'content-type'        => 'ContentType',
+			'expires'             => 'Expires',
+		];
+
 		/**
 		 * @inheritDoc
 		 */
-		public function build($resource, &$writeOptions = [], array $options = []) {
+		public function build(Asset $asset, array $options = []): Asset {
 
-			$keepUnchanged = Arr::only($writeOptions, ['visibility']);
-
-			// extract options which can be passed to s3
-			$s3Options = Arr::only(
-				array_change_key_case($writeOptions, CASE_LOWER),
-				[
-					'cache-control',
-					'content-disposition',
-					'content-encoding',
-					'content-language',
-					'content-type',
-					'expires',
-				]
-			);
-
-			// rebuild write options in studly case as wanted by s3 client
-			$writeOptions = $keepUnchanged;
-			foreach($s3Options as $key => $value) {
-				$writeOptions[Str::studly($key)] = $value;
+			// here we convert some meta data to storage options
+			foreach (self::META_MAP as $metaKey => $storageOptionKey) {
+				$currValue = $asset->getMeta($metaKey);
+				if ($currValue !== null)
+					$asset->setStorageOption($storageOptionKey, $currValue);
 			}
 
-			return $resource;
+			return $asset;
 		}
-
 
 	}

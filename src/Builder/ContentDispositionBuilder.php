@@ -4,16 +4,18 @@
 	namespace MehrIt\LeviAssets\Builder;
 
 
+	use MehrIt\LeviAssets\Contracts\Asset;
+
 	class ContentDispositionBuilder extends AbstractAssetBuilder
 	{
 		/**
 		 * @inheritDoc
 		 */
-		public function build($resource, &$writeOptions = [], array $options = []) {
-
+		public function build(Asset $asset, array $options = []): Asset {
+			
 			if (count($options))
-				$writeOptions['Content-Disposition'] = implode('; ', $options);
-
-			return $resource;
+				$asset->setMeta('Content-Disposition', implode('; ', $options));
+			
+			return $asset;
 		}
 	}
